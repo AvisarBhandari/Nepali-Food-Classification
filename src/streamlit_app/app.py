@@ -1,17 +1,18 @@
 
+import sys
+from pathlib import Path
 import torch
 import streamlit as st
 from predict import pred_image, load_model
-from src.model import make_model
-from src.class_name import class_names
 from PIL import Image
-from pathlib import Path
 import pandas as pd
 from Grad_CAM_Visualization import generate_gradcam
-import sys
-from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(ROOT))
+from src.model import make_model
+from src.class_name import class_names
+
 
 st.set_page_config(page_title="Nepali Food Classification", layout="wide")
 device = "cuda" if torch.cuda.is_available() else "cpu"
