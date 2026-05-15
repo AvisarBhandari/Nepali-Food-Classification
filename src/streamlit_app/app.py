@@ -1,5 +1,4 @@
 
-from matplotlib.pyplot import cla
 import torch
 import streamlit as st
 from predict import pred_image, load_model
