@@ -11,6 +11,16 @@ Run the web app: [View Project](https://avisarbhandari-nepali-food-classific-src
 
 ---
 
+### FastAPI 
+
+```
+POST /predict
+```
+
+<img width="1413" height="421" alt="pasted file" src="https://github.com/user-attachments/assets/9b9747b0-78f9-40e2-af54-5593c2642904" />
+
+---
+
 ## Project Overview
 
 This project trains two separate models using the same architecture **(ResNet18)** but different data preprocessing strategies:
