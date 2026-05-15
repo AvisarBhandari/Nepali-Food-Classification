@@ -1,4 +1,3 @@
-from turtle import up
 
 from matplotlib.pyplot import cla
 import torch
