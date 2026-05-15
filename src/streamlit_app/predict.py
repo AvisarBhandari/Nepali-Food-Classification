@@ -3,21 +3,24 @@ import torchvision.models as models
 from PIL import Image
 import torch
 
+IMG_SIZE = 224
 
-def pred_image(image, model, device):
+transform = transforms.Compose([
+    transforms.Resize((IMG_SIZE, IMG_SIZE)),
+    transforms.ToTensor(),
+])
+def pred_image(image, model,class_names, device):
     model.eval()
-    weights = models.IMAGENET1K_V1.DEFAULT
-    transforms = weights.transforms()
-    img = Image.open(image).convert("RGB")
-    img_tensor = transforms(img)
-    img_tensor = img_tensor.unsqueeze(0).to(device)
+    img_tensor = transform(image).unsqueeze(0).to(device)
     with torch.inference_mode():
         logits = model(img_tensor)
         prob = (torch.softmax(logits, dim=1)).squeeze()
         top_pred, top_index = torch.topk(prob, largest=True, sorted=True, k=3)
         results = []
-    for pred, idx in zip(top_pred[0], top_index[0]):
-        results.append({"class": pred, "Confidance": idx})
+        # top_pred = top_pred.squeeze(0)
+        # top_index = top_index.squeeze(0)
+    for pred, idx in zip(top_pred, top_index):
+        results.append({"class": class_names[idx.item()], "Confidance": f"{pred.item() * 100:.2f}"})
     return results
 
 

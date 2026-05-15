@@ -9,6 +9,7 @@ import json
 
 from datasets import create_dataloader
 from model import make_model
+from class_name import class_names
 from engine import train_step, test_step
 from torch.optim.lr_scheduler import StepLR
 
@@ -17,13 +18,13 @@ torch.cuda.manual_seed(42)
 
 def train(epochs, LR, model_path):
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    train_loader, test_loader, class_names = create_dataloader(
+    train_loader, test_loader= create_dataloader(
         train_dir="dataset/train", test_dir="dataset/test"
     )
     model = make_model(class_names)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
-    scheduler = StepLR(optimizer, step_size=3, gamma=0.1)
+    # scheduler = StepLR(optimizer, step_size=3, gamma=0.1)
     start_time = timer()
     model_result = train_loop(
         MODEL_SAVE_PATH=model_path,
@@ -34,7 +35,7 @@ def train(epochs, LR, model_path):
         loss_fn=loss_fn,
         epochs=epochs,
         device=device,
-        scheduler=scheduler,
+        # scheduler=scheduler,
         class_name=class_names
     )
     end_time = timer()
@@ -91,7 +92,8 @@ def train_loop(
                 scheduler.step()
 
             if test_acc > best_test_acc:
-                best_test_acc = test_acc
+                best_test_acc = f"{test_acc:.2f}"
+                float(best_test_acc)
                 improvement_counter = 5
                 torch.save(
                     {

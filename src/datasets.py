@@ -36,5 +36,5 @@ def create_dataloader(train_dir, test_dir,dataset:bool=False):
         train_loader = DataLoader(dataset = train_data, shuffle=True, batch_size = BATCH_SIZE)
         test_loader = DataLoader(dataset = test_data, batch_size = BATCH_SIZE)
 
-        return train_loader, test_loader, test_data.classes
+        return train_loader, test_loader
 

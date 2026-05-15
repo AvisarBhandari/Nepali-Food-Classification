@@ -1,9 +1,9 @@
 class_names = [
-    "samosa",
     "chatpate",
-    "sel_roti",
-    "momo",
     "dal_bhat",
     "gundruk",
+    "momo",
+    "samosa",
+    "sel_roti",
     "yomari",
 ]
