@@ -1,0 +1,15 @@
+path:path:  dataset # Dataset root dir
+train: train/images # Train images (relative to path)
+val: val/images # Val images (relative to path)
+
+# Classes object mapped from your classes.txt
+names:
+  0: Momo
+  1: Chatpate
+  2: Dal_Bhat
+  3: Gundruk
+  4: Momo
+  5: Samosa
+  6: Sel_Roti
+  7: Yomari
+

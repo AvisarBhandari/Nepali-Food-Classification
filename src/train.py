@@ -16,9 +16,10 @@ from torch.optim.lr_scheduler import StepLR
 torch.cuda.manual_seed(42)
 
 
+
 def train(epochs, LR, model_path):
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    train_loader, test_loader= create_dataloader(
+    train_loader, test_loader = create_dataloader(
         train_dir="dataset/train", test_dir="dataset/test"
     )
     model = make_model(class_names)
@@ -36,7 +37,7 @@ def train(epochs, LR, model_path):
         epochs=epochs,
         device=device,
         # scheduler=scheduler,
-        class_name=class_names
+        class_name=class_names,
     )
     end_time = timer()
     print("Saving Result...")
@@ -49,7 +50,7 @@ def train(epochs, LR, model_path):
 def train_loop(
     MODEL_SAVE_PATH: str,
     model: torch.nn.Module,
-    class_name:list,
+    class_name: list,
     train_dataloader: torch.utils.data.DataLoader,
     test_dataloader: torch.utils.data.DataLoader,
     optimizer: torch.optim.Optimizer,
