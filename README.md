@@ -1,7 +1,19 @@
 # 🍛 Nepali Food Classifier
 
-A deep learning image classification project to recognize Nepali food dishes using **transfer learning (ResNet18)**.
-This project compares two training strategies based on different data augmentation techniques.
+An end-to-end computer vision project that classifies traditional Nepali dishes using transfer learning (ResNet18), compares augmentation strategies, and deploys predictions through Streamlit and FastAPI.
+
+---
+## Challenges Faced
+
+- Small dataset size
+- Class imbalance
+- Overfitting in baseline model
+- Generalization issues
+
+Solutions:
+- Strong augmentation
+- Transfer learning
+- Fine tuning
 
 ---
 
