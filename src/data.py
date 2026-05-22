@@ -63,3 +63,4 @@ def split_data():
         
 
     print("\nDataset split complete.")
+download_verification()
