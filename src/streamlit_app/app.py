@@ -11,18 +11,17 @@ from Grad_CAM_Visualization import generate_gradcam
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT))
 from src.model import make_model
-from src.class_name import class_names
 
-
+class_len = 7
 st.set_page_config(page_title="Nepali Food Classification", layout="wide")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model_0, cnn = load_model(
-    "model/best_model.pth", model_fn=make_model, num_classes=class_names, device=device
+    "model/best_model.pth", model_fn=make_model, num_classes=class_len, device=device
 )
 model_1, cn = load_model(
     "model/best_model_v1,pth",
     model_fn=make_model,
-    num_classes=class_names,
+    num_classes=class_len,
     device=device,
 )
 

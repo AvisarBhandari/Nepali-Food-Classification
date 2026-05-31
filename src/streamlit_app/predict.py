@@ -5,11 +5,15 @@ import torch
 
 IMG_SIZE = 224
 
-transform = transforms.Compose([
-    transforms.Resize((IMG_SIZE, IMG_SIZE)),
-    transforms.ToTensor(),
-])
-def pred_image(image, model,class_names, device):
+transform = transforms.Compose(
+    [
+        transforms.Resize((IMG_SIZE, IMG_SIZE)),
+        transforms.ToTensor(),
+    ]
+)
+
+
+def pred_image(image, model, class_names, device):
     model.eval()
     img_tensor = transform(image).unsqueeze(0).to(device)
     with torch.inference_mode():
@@ -20,7 +24,9 @@ def pred_image(image, model,class_names, device):
         # top_pred = top_pred.squeeze(0)
         # top_index = top_index.squeeze(0)
     for pred, idx in zip(top_pred, top_index):
-        results.append({"class": class_names[idx.item()], "Confidance": f"{pred.item() * 100:.2f}"})
+        results.append(
+            {"class": class_names[idx.item()], "Confidance": f"{pred.item() * 100:.2f}"}
+        )
     return results
 
 
@@ -28,7 +34,7 @@ def load_model(model_path, model_fn, num_classes, device):
 
     checkpoint = torch.load(model_path, map_location=device)
 
-    model = model_fn(num_classes)
+    model = model_fn(class_len=num_classes)
 
     model.load_state_dict(checkpoint["model_state"])
 
