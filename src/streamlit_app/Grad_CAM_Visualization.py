@@ -7,7 +7,7 @@ from PIL import Image
 import torchvision.models as models
 from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.image import show_cam_on_image
-
+from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 
 def process_image(image_path, device):
     weights = models.ResNet18_Weights.DEFAULT 
@@ -38,9 +38,9 @@ def generate_gradcam(model, image_path, device):
     target_layers = [model.layer2]
 
     cam = GradCAM(model=model, target_layers=target_layers)
-
+    targets = [ClassifierOutputTarget(0)]  # Assuming class index 0 for demonstration
     # generate heatmap
-    grayscale_cam = cam(input_tensor=input_tensor, targets=None)[0]
+    grayscale_cam = cam(input_tensor=input_tensor, targets=targets)[0]
 
     # resize heatmap
     grayscale_cam = cv2.resize(grayscale_cam, (rgb_img.shape[1], rgb_img.shape[0]))
